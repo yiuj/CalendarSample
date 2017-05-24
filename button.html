@@ -1,47 +1,102 @@
-<html lang="en" >
+<html lang="en">
+
 <head>
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 </head>
-<body ng-app="BlankApp" ng-cloak>
+
+<body ng-app="BlankApp" ng-controller="BlankCtrl" ng-cloak>
   <!--
     Your HTML content here
-  -->  
-<md-button class="md-raised md-primary md-hue-1">Click me</md-button>
-  
+  -->
+  <md-button class="md-raised md-primary md-hue-1" ng-click="showConfirm($event)">Confirm</md-button>
+  <md-button class="md-raised md-primary md-hue-1" ng-click="showAdvanced($event)">Custom</md-button>
+
   <!-- Angular Material requires Angular.js Libraries -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="/node_modules/angular/angular.min"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
   <!-- Angular Material Library -->
   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-  
+
   <!-- Your application bootstrap  -->
-  <script type="text/javascript">    
+  <script type="text/javascript">
     /**
      * You must include the dependency on 'ngMaterial' 
      */
-    angular.module('BlankApp', ['ngMaterial'])
-    
-    .config(function($mdThemingProvider) {
-        $mdThemingProvider
-          .theme('default')
-          .primaryPalette('cyan', {
+    var app = angular.module('BlankApp', ['ngMaterial']);
+
+    app.config(function ($mdThemingProvider) {
+      $mdThemingProvider
+        .theme('default')
+        .primaryPalette('cyan', {
           'default': '600'
         })
-          .accentPalette('grey', {
+        .accentPalette('grey', {
           'default': '800'
         })
-          .warnPalette('red')
-          .backgroundPalette('grey');
-      
-      
-      });
+        .warnPalette('red')
+        .backgroundPalette('grey');
+
+
+    });
+    app.controller('BlankCtrl', function ($scope, $mdDialog) {
+      $scope.showConfirm = function (ev) {
+        var confirm = $mdDialog.confirm()
+          .title('Confirm?')
+          .textContent('You confirmed')
+          .ariaLabel('Lucky Day')
+          .targetEvent(ev)
+          .ok('Please do')
+          .cancel('No thanks');
+        $mdDialog.show(confirm).then(function () {
+          $scope.status = 'You confirmeddd';
+        }, function () {
+          $scope.status = 'You denieddd';
+        });
+      }
+
+      $scope.showAdvanced = function (ev) {
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: 'custom_dialog.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: true,
+          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+          .then(function () {
+            $scope.status = 'You said the information was asdf';
+          }, function () {
+            $scope.status = 'You cancelled the dialog.';
+          });
+      };
+
+      function DialogController($scope, $mdDialog) {
+        $scope.hide = function () {
+          $mdDialog.hide();
+        };
+
+        $scope.cancel = function () {
+          $mdDialog.cancel();
+        };
+
+        $scope.answer = function (answer) {
+          $mdDialog.hide(answer);
+        };
+      }
+    });
   </script>
-  
+  <div ng-if="status" id="status">
+    <b layout="row" layout-align="center center" class="md-padding">
+      {{status}}
+    </b>
+  </div>
 </body>
+
 </html>
 
 <!--
