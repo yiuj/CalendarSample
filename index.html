@@ -1,0 +1,17 @@
+ <!doctype html>
+<html >
+  <head>
+   
+  </head>
+  <body>
+  	<div ng-controller="addTask">
+	<div>
+		Favorite word: <input type="text" ng-model="addTask" />
+		{{addTask}}
+	</div>
+  	<form>
+ 		<input type="button" value = "click me" onClick = ng-bind ="addTask"/>
+ 	</form>
+
+  </body>
+</html>
