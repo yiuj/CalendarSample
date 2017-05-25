@@ -13,6 +13,7 @@
   <!--
     Your HTML content here
   -->
+<<<<<<< HEAD
   <!-- <ul ng-repeat="task in taskList" id="tasks">
     <li><md-button class="md-raised md-primary md-hue-1" ng-click="showTask($event,task)">
     {{task.name}}
@@ -53,51 +54,60 @@
     </md-dialog>
   </script>
 </div>
+=======
+<ul ng-repeat="task in taskList" id="tasks">
+  <li><md-button class="md-raised md-primary md-hue-1" ng-click="showTask($event,task)">
+  {{task.name}}
+  </md-button></li>
+</ul>
 
-  <!-- Angular Material requires Angular.js Libraries -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+<md-button class="md-raised md-primary md-hue-1" ng-click="addTask()">Add Task</md-button>
+>>>>>>> 0565d7e8bc12acda490dfde3c95dd38c031f5477
 
-  <!-- Angular Material Library -->
-  <script src="node_modules/angular-material/angular-material.min.js"></script>
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
-  <!-- Your application bootstrap  -->
-  <script src="button.js"></script>
+<!-- Angular Material Library -->
+<script src="node_modules/angular-material/angular-material.min.js"></script>
+
+<!-- Your application bootstrap  -->
+<script src="button.js"></script>
 
 
-  <!-- THIS BIT IS CURRENTLY UNECESSARY
-  <script type="text/ng-template" id="dialog.tmpl.html">
-    <md-dialog aria-label="Task">
-      <form ng-cloak>
-        <md-toolbar>
-          <div class="md-toolbar-tools">
-            <h2>{{task.name}}</h2>
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="cancel()">
-              <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-            </md-button>
-          </div>
-        </md-toolbar>
-
-        <md-dialog-content>
-          <div class="md-dialog-content">
-            <p>
-              Task description
-            </p>
-          </div>
-        </md-dialog-content>
-
-        <md-dialog-actions layout="row">
+<!-- THIS BIT IS CURRENTLY UNECESSARY
+<script type="text/ng-template" id="dialog.tmpl.html">
+  <md-dialog aria-label="Task">
+    <form ng-cloak>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>{{task.name}}</h2>
           <span flex></span>
-          <md-button ng-click="answer('asdf')">
-            Completed
+          <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
           </md-button>
-        </md-dialog-actions>
-      </form>
-    </md-dialog>
-  </script> -->
+        </div>
+      </md-toolbar>
+
+      <md-dialog-content>
+        <div class="md-dialog-content">
+          <p>
+            Task description
+          </p>
+        </div>
+      </md-dialog-content>
+
+      <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="answer('asdf')">
+          Completed
+        </md-button>
+      </md-dialog-actions>
+    </form>
+  </md-dialog>
+</script> -->
 </body>
 
 </html>

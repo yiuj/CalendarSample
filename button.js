@@ -3,8 +3,12 @@
  */
 var app = angular.module('BlankApp', ['ngMaterial']);
 
+<<<<<<< HEAD
 
 app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
+=======
+app.controller('BlankCtrl', function ($scope, $mdDialog) {
+>>>>>>> 0565d7e8bc12acda490dfde3c95dd38c031f5477
   $scope.taskList = [];
 
   this.open = function(ev) {
@@ -74,8 +78,6 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
       $scope.delTask(task);
     });
   };
-
-
 
   $scope.delTask = function (task) {
     var index=$scope.taskList.indexOf(task)
