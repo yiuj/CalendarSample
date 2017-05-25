@@ -1,5 +1,3 @@
-"# TaskTracker" 
-<<<<<<< HEAD
-"# TaskTracker" 
+Task Tracker
 =======
->>>>>>> 714da8f9e3009a97ea5541c093cf5e957cbabffa
+An attempt at mastering Angular and Web dev
