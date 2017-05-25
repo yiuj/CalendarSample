@@ -12,9 +12,9 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
     var confirm = $mdDialog.prompt()
       .title('What task would you like to add?')
       .textContent('Give a useful name')
-      .placeholder('Dog name')
-      .ariaLabel('Dog name')
-      .initialValue('Task')
+      .placeholder('Task Name')
+      .ariaLabel('Task Name')
+      .initialValue('')
       .targetEvent(ev)
       .ok('Okay!')
       .cancel('Cancel');
