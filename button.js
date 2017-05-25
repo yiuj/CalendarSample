@@ -21,6 +21,25 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
     );
     $scope.delTask();
   }
+  $scope.showPrompt = function(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title('What task would you like to add?')
+      .textContent('Give a useful name')
+      .placeholder('Dog name')
+      .ariaLabel('Dog name')
+      .initialValue('Task')
+      .targetEvent(ev)
+      .ok('Okay!')
+      .cancel('Cancel');
+
+    $mdDialog.show(confirm).then(function(result) {
+      angular.element(tasksP).append($compile('<li><md-button class="md-raised md-primary md-hue-1" ng-click="showAdvanced($event)">'+result+'</md-button></li>')($scope));
+    }, function() {
+      window.alert("Task was not added.");
+    });
+  };
+
   $scope.showAdvanced = function (ev) {
     $mdDialog.show({
       controller: DialogController,
@@ -58,8 +77,8 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
   $scope.addTask = function () {
     //window.alert("Tasks added");
     tasks += 1;
+    var result = $scope.showPrompt();
     window.alert("Task number " + tasks + " has been added.");
-    angular.element(tasksP).append($compile('<li><md-button class="md-raised md-primary md-hue-1" ng-click="showAdvanced($event)">Task</md-button></li>')($scope));
   };
 
   $scope.delTask = function () {
