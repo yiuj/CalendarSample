@@ -21,6 +21,7 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
       .ok('Okay!')
       .cancel('Cancel');
     $mdDialog.show(confirm).then(function(result) {
+      tasks += 1;
       angular.element(tasksP).append($compile('<li><md-button class="md-raised md-primary md-hue-1" ng-click="showTask($event)">'+result+'</md-button></li>')($scope));
     }, function() {
       window.alert("Task was not added.");
