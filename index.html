@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="utf-8">
+    <title>Task Manager</title>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script>
+      document.write('<base href="' + document.location + '" />');
+    </script>
+    <script src="app.js"></script>
+    <!--<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.0/css/bootstrap-combined.min.css"
+    rel="stylesheet">-->
+  </head>
+<body ng-app="birthdayToDo" ng-controller="main">
+    <div id="wrap">
+
+      <!-- Begin page content -->
+      <div class="container">
+        <div class="page-header">
+          <h1>Task Manager</h1>
+        </div>
+            <ul ng-repeat="bday in bdays">
+                <li>
+                  <span ng-hide="editing" ng-click="editing = true">{{bday.name}} | {{bday.date}}</span>
+                  <form ng-show="editing" ng-submit="editing = false">
+                    <label>Task:</label>
+                    <input type="text" ng-model="bday.name" placeholder="Task" ng-required/>
+                    <label>Task Description:</label>
+                    <input type="text" ng-model="bday.date" placeholder="Task Description" ng-required/>
+                    <br/>
+                    <button class="btn" type="submit">Save</button>
+                    <button class="btn" type="button" ng-click="remove(bday)">Delete</button>
+                  </form>
+                </li>
+                
+            </ul>
+
+           <form ng-show="visible" ng-submit="newBirthday()">
+            <label>Task:</label>
+            <input type="text" ng-model="bdayname" placeholder="Task" ng-required/>
+            <label>Task Description:</label>
+            <input type="text" ng-model="bdaydate" placeholder="Task Description" ng-required/>
+            <br/>
+            <button class="btn" type="submit">Save</button>
+          </form>
+      </div>
+
+      <div id="push"></div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <a class="button" ng-click="visible = true"><i class="icon-plus"></i>Add</a>
+      </div>
+    </div>
+    </body>
