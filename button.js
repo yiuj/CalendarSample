@@ -43,6 +43,11 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
       });
   };
 
+  $scope.delTask = function (task) {
+    var index=$scope.taskList.indexOf(task)
+      $scope.taskList.splice(index,1);
+  };
+
   function DialogController($scope, $mdDialog) {
     $scope.hide = function () {
       $mdDialog.hide();
@@ -55,12 +60,6 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
     $scope.answer = function (answer) {
       $mdDialog.hide(answer);
     };
-  }
-
-
-  $scope.delTask = function (task) {
-    var index=$scope.taskList.indexOf(task)
-      $scope.taskList.splice(index,1);
-  }
+  };
 
 });
