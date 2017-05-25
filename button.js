@@ -4,7 +4,6 @@
 var app = angular.module('BlankApp', ['ngMaterial']);
 
 app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
-  $scope.btn = document.getElementById("addButton");
   $scope.taskList = [];
 
   $scope.addTask = function(ev) {
@@ -19,29 +18,48 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
       .ok('Okay!')
       .cancel('Cancel');
     $mdDialog.show(confirm).then(function(result) {
-      $scope.taskList.push({name: result});
-  
-      window.alert(taskList);
-
+      $scope.taskList.push({name: result,
+                            desc: "This task needs to be completed."});
     }, function() {
       window.alert("Task was not added.");
     });
   };
 
-  $scope.showTask = function (ev,task) {
-    $mdDialog.show({
-      controller: DialogController,
-      templateUrl: 'dialog.tmpl.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose: true,
-      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    })
-      .then(function (answer) {
-        $scope.delTask(task);
-      }, function () {
-      });
+  // $scope.showTask = function (ev,task) {
+  //   $mdDialog.show({
+  //     controller: DialogController,
+  //     templateUrl: 'dialog.tmpl.html',
+  //     parent: angular.element(document.body),
+  //     targetEvent: ev,
+  //     clickOutsideToClose: true,
+  //     fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+  //   })
+  //     .then(function (answer) {
+  //       $scope.delTask(task);
+  //     }, function () {
+  //     });
+  // };
+
+  $scope.showTask = function(ev, task) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title(task.name)
+      .textContent(task.desc)
+      .placeholder('Task Description')
+      .ariaLabel('Task Description')
+      .initialValue(task.desc)
+      .targetEvent(ev)
+      .ok('Save!')
+      .cancel('Complete!');
+
+    $mdDialog.show(confirm).then(function(result) {
+      task.desc = result;
+    }, function() {
+      $scope.delTask(task);
+    });
   };
+
+
 
   $scope.delTask = function (task) {
     var index=$scope.taskList.indexOf(task)

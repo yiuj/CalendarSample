@@ -1,7 +1,6 @@
 <html lang="en">
 
 <head>
-  <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 </head>
 
@@ -33,12 +32,15 @@
 
   <!-- Your application bootstrap  -->
   <script src="button.js"></script>
+
+
+  <!-- THIS BIT IS CURRENTLY UNECESSARY
   <script type="text/ng-template" id="dialog.tmpl.html">
     <md-dialog aria-label="Task">
       <form ng-cloak>
         <md-toolbar>
           <div class="md-toolbar-tools">
-            <h2>Task</h2>
+            <h2>{{task.name}}</h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="cancel()">
               <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
@@ -48,7 +50,6 @@
 
         <md-dialog-content>
           <div class="md-dialog-content">
-            <h2>Task</h2>
             <p>
               Task description
             </p>
@@ -63,7 +64,7 @@
         </md-dialog-actions>
       </form>
     </md-dialog>
-  </script>
+  </script> -->
 </body>
 
 </html>
