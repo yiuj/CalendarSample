@@ -3,7 +3,7 @@
  */
 var app = angular.module('BlankApp', ['ngMaterial']);
 
-app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
+app.controller('BlankCtrl', function ($scope, $mdDialog) {
   $scope.taskList = [];
 
   $scope.addTask = function(ev) {
@@ -58,8 +58,6 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
       $scope.delTask(task);
     });
   };
-
-
 
   $scope.delTask = function (task) {
     var index=$scope.taskList.indexOf(task)
