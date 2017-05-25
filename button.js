@@ -47,7 +47,7 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
       .textContent(task.desc)
       .placeholder('Task Description')
       .ariaLabel('Task Description')
-      .initialValue(task.desc)
+      .placeholder('Edit Description')
       .targetEvent(ev)
       .ok('Save!')
       .cancel('Complete!');
