@@ -1,15 +1,14 @@
 /**
  * You must include the dependency on 'ngMaterial' 
  */
-var app = angular.module('BlankApp', ['ngMaterial']);
+var app = angular.module('TaskApp', ['ngMaterial']);
 
-
-app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
+app.controller('TaskCtrl', function ($scope, $mdDialog) {
 
   $scope.taskList = [];
 
-  this.open = function(ev) {
-    this.showText = false;
+  $scope.addTask = function(ev) {
+    $scope.showText = false;
     $mdDialog.show(
       {
         templateUrl: "test.html",
@@ -21,56 +20,24 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
     });
   };
 
-  this.save = function () {
-    this.showText = true;
+  $scope.addTaskHelper = function(ev, namePlaceholder, descPlaceholder) {
+    $scope.taskList.push({name: namePlaceholder,
+                          desc: descPlaceholder});
     $mdDialog.cancel();
-  }
-
-  $scope.addTask = function(ev) {
-    // Appending dialog to document.body to cover sidenav in docs app
-    var confirm = $mdDialog.prompt()
-      .title('What task would you like to add?')
-      .placeholder('Task Name')
-      .ariaLabel('Task Name')
-      .initialValue('')
-      .targetEvent(ev)
-      .ok('Okay!')
-      .cancel('Cancel');
-    $mdDialog.show(confirm).then(function(result) {
-      $scope.taskList.push({name: result});
-    }, function() {
-      window.alert("Task was not added.");
-    });
   };
 
-  $scope.showTask = function (ev,task) {
-    $mdDialog.show({
-      controller: DialogController,
-      templateUrl: 'dialog.tmpl.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose: true,
-      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    })
-      .then(function (answer) {
-        $scope.delTask(task);
-      }, function () {
-      });
-  };
 
   $scope.showTask = function(ev, task) {
     // Appending dialog to document.body to cover sidenav in docs app
-    var confirm = $mdDialog.prompt()
+    var confirm = $mdDialog.confirm()
       .title(task.name)
       .textContent(task.desc)
-      .ariaLabel('Task Description')
-      .placeholder('Edit Description')
+      .ariaLabel('Task')
       .targetEvent(ev)
-      .ok('Save!')
-      .cancel('Complete!');
+      .ok('Not yet')
+      .cancel('Completed!');
 
-    $mdDialog.show(confirm).then(function(result) {
-      task.desc = result;
+    $mdDialog.show(confirm).then(function() {
     }, function() {
       $scope.delTask(task);
     });
