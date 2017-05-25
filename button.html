@@ -14,7 +14,10 @@
   <!--
     Your HTML content here
   -->
-  <ul id="tasks">
+  <ul ng-repeat="task in taskList" id="tasks">
+    <li><md-button class="md-raised md-primary md-hue-1" ng-click="showTask($event,task)">
+    {{task.name}}
+    </md-button></li>
   </ul>
 
   <md-button class="md-raised md-primary md-hue-1" ng-click="addTask()">Add Task</md-button>

@@ -1,13 +1,11 @@
 /**
  * You must include the dependency on 'ngMaterial' 
  */
-var tasksP = document.getElementById("tasks");
-var btn = document.getElementById("addButton");
-var text = tasksP.innerHTML;
-var tasks = 0;
 var app = angular.module('BlankApp', ['ngMaterial']);
 
 app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
+  $scope.btn = document.getElementById("addButton");
+  $scope.taskList = [];
 
   $scope.addTask = function(ev) {
     // Appending dialog to document.body to cover sidenav in docs app
@@ -21,14 +19,16 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
       .ok('Okay!')
       .cancel('Cancel');
     $mdDialog.show(confirm).then(function(result) {
-      tasks += 1;
-      angular.element(tasksP).append($compile('<li><md-button class="md-raised md-primary md-hue-1" ng-click="showTask($event)">'+result+'</md-button></li>')($scope));
+      $scope.taskList.push({name: result});
+  
+      window.alert(taskList);
+
     }, function() {
       window.alert("Task was not added.");
     });
   };
 
-  $scope.showTask = function (ev) {
+  $scope.showTask = function (ev,task) {
     $mdDialog.show({
       controller: DialogController,
       templateUrl: 'dialog.tmpl.html',
@@ -38,10 +38,8 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
       fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
     })
       .then(function (answer) {
-        $scope.delTask();
-        $scope.status = 'You said the information was "' + answer + '".';
+        $scope.delTask(task);
       }, function () {
-        $scope.status = 'You cancelled the dialog.';
       });
   };
 
@@ -60,12 +58,9 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
   }
 
 
-  $scope.delTask = function () {
-    tasks -= 1;
-    angular.element(tasksP).empty();
-    for (var i = 0; i < tasks; i++) {
-      angular.element(tasksP).append($compile('<li><md-button class="md-raised md-primary md-hue-1" ng-click="showTask($event)">Task</md-button></li>')($scope));
-    }
+  $scope.delTask = function (task) {
+    var index=$scope.taskList.indexOf(task)
+      $scope.taskList.splice(index,1);
   }
 
 });
