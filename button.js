@@ -3,12 +3,9 @@
  */
 var app = angular.module('BlankApp', ['ngMaterial']);
 
-<<<<<<< HEAD
 
 app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
-=======
-app.controller('BlankCtrl', function ($scope, $mdDialog) {
->>>>>>> 0565d7e8bc12acda490dfde3c95dd38c031f5477
+
   $scope.taskList = [];
 
   this.open = function(ev) {
@@ -40,26 +37,26 @@ app.controller('BlankCtrl', function ($scope, $mdDialog) {
       .ok('Okay!')
       .cancel('Cancel');
     $mdDialog.show(confirm).then(function(result) {
-      $scope.taskList.push({name: result, desc: vm.placeholder2});
+      $scope.taskList.push({name: result});
     }, function() {
       window.alert("Task was not added.");
     });
   };
 
-  // $scope.showTask = function (ev,task) {
-  //   $mdDialog.show({
-  //     controller: DialogController,
-  //     templateUrl: 'dialog.tmpl.html',
-  //     parent: angular.element(document.body),
-  //     targetEvent: ev,
-  //     clickOutsideToClose: true,
-  //     fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-  //   })
-  //     .then(function (answer) {
-  //       $scope.delTask(task);
-  //     }, function () {
-  //     });
-  // };
+  $scope.showTask = function (ev,task) {
+    $mdDialog.show({
+      controller: DialogController,
+      templateUrl: 'dialog.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+    })
+      .then(function (answer) {
+        $scope.delTask(task);
+      }, function () {
+      });
+  };
 
   $scope.showTask = function(ev, task) {
     // Appending dialog to document.body to cover sidenav in docs app
