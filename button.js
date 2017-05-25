@@ -64,7 +64,7 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
     tasks -= 1;
     angular.element(tasksP).empty();
     for (var i = 0; i < tasks; i++) {
-      angular.element(tasksP).append($compile('<li><md-button class="md-raised md-primary md-hue-1" ng-click="showAdvanced($event)">Task</md-button></li>')($scope));
+      angular.element(tasksP).append($compile('<li><md-button class="md-raised md-primary md-hue-1" ng-click="showTask($event)">Task</md-button></li>')($scope));
     }
   }
 
