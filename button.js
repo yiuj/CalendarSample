@@ -3,14 +3,32 @@
  */
 var app = angular.module('BlankApp', ['ngMaterial']);
 
+
 app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
   $scope.taskList = [];
+
+  this.open = function(ev) {
+    this.showText = false;
+    $mdDialog.show(
+      {
+        templateUrl: "test.html",
+        clickOutsideToClose: true,
+        scope: $scope,
+        preserveScope: true,
+        controller: function($scope) {
+       },
+    });
+  };
+
+  this.save = function () {
+    this.showText = true;
+    $mdDialog.cancel();
+  }
 
   $scope.addTask = function(ev) {
     // Appending dialog to document.body to cover sidenav in docs app
     var confirm = $mdDialog.prompt()
       .title('What task would you like to add?')
-      .textContent('Give a useful name')
       .placeholder('Task Name')
       .ariaLabel('Task Name')
       .initialValue('')
@@ -18,8 +36,7 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
       .ok('Okay!')
       .cancel('Cancel');
     $mdDialog.show(confirm).then(function(result) {
-      $scope.taskList.push({name: result,
-                            desc: "This task needs to be completed."});
+      $scope.taskList.push({name: result, desc: vm.placeholder2});
     }, function() {
       window.alert("Task was not added.");
     });
@@ -45,7 +62,6 @@ app.controller('BlankCtrl', function ($scope, $mdDialog, $compile) {
     var confirm = $mdDialog.prompt()
       .title(task.name)
       .textContent(task.desc)
-      .placeholder('Task Description')
       .ariaLabel('Task Description')
       .placeholder('Edit Description')
       .targetEvent(ev)
